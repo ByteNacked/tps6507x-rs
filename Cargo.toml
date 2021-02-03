@@ -1,0 +1,11 @@
+[package]
+name = "tps6507x"
+version = "0.1.0"
+authors = ["Roman M. <m3angreen@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+nb = "0.1.2"
+embedded-hal = "0.2.3"
+bitfield = "0.13.2"
+
