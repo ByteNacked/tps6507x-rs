@@ -5,7 +5,7 @@ authors = ["Roman M. <m3angreen@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-nb = "0.1.2"
-embedded-hal = "0.2.3"
+nb = "1"
+embedded-hal = { version = "0.2.2", features = ["unproven"] }
 bitfield = "0.13.2"
 
