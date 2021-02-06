@@ -7,5 +7,8 @@ edition = "2018"
 [dependencies]
 nb = "1"
 embedded-hal = { version = "0.2.2", features = ["unproven"] }
-bitfield = "0.13.2"
+bitfield = "0.13"
+
+[dev-dependencies]
+embedded-hal-mock = "0.7"
 

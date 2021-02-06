@@ -128,13 +128,13 @@ pub mod chgconfig {
 
     #[derive(Debug)]
     pub struct ChargerConfig {
-        charger_enable: bool,
-        suspend_charge: bool,
-        charge_termination: bool,
-        charger_reset: bool,
-        sensor_type: SensorType,
-        safety_timer_enable: bool,
-        charger_safety_timer_timeout: SafetyTimerTimeOut,
+        pub charger_enable: bool,
+        pub suspend_charge: bool,
+        pub charge_termination: bool,
+        pub charger_reset: bool,
+        pub sensor_type: SensorType,
+        pub safety_timer_enable: bool,
+        pub charger_safety_timer_timeout: SafetyTimerTimeOut,
     }
 
     impl Default for ChargerConfig {
@@ -159,6 +159,7 @@ pub mod chgconfig {
             reg.set_charge_termination_off(!v.charge_termination);
             reg.set_charger_reset(v.charger_reset);
             reg.set_sensor_type10k(v.sensor_type.into());
+            reg.set_safety_timer_enable(v.safety_timer_enable);
             reg.set_charge_safety_timer(v.charger_safety_timer_timeout);
 
             reg

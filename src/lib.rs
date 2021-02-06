@@ -16,7 +16,8 @@ pub mod defs;
 pub mod params;
 pub mod regs;
 
-use defs::DCDCOutputVoltage;
+pub use defs::DCDCOutputVoltage;
+pub use regs::chgconfig::ChargerConfig;
 use regs::{adconfig, ppath1::*, *};
 
 #[derive(Debug)]
@@ -45,6 +46,11 @@ where
         Self { i2c }
     }
 
+    /// Destroy driver and free interface
+    pub fn destroy(self) -> I2C {
+        self.i2c
+    }
+
     /// Config power path control register
     pub fn set_power_path(&mut self, power_path: PowerPath) -> Tps6507xResult<(), E> {
         let reg: ppath1::PPATH1 = power_path.into();
@@ -65,10 +71,7 @@ where
     }
 
     /// Set charger configuration
-    pub fn set_charger_config(
-        &mut self,
-        config: chgconfig::ChargerConfig,
-    ) -> Tps6507xResult<(), E> {
+    pub fn set_charger_config(&mut self, config: ChargerConfig) -> Tps6507xResult<(), E> {
         let reg: chgconfig::CHGCONFIG1 = config.into();
         self.write_register_raw(Registers::CHGCONFIG1, reg.0)?;
         Ok(())
@@ -105,7 +108,7 @@ where
     }
 
     /// The DEFLDO2 register is used to set the output voltage of LDO2
-    pub fn set_ldo2_voltage(&mut self, voltage: DCDCOutputVoltage) -> Tps6507xResult<(), E> {
+    pub fn set_ldo2(&mut self, voltage: DCDCOutputVoltage) -> Tps6507xResult<(), E> {
         self.write_register_raw(Registers::DEFLDO2, voltage as u8)?;
         Ok(())
     }

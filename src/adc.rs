@@ -22,6 +22,8 @@ where
         reg.set_ad_enable(true);
         reg.set_conversion_start(true);
         reg.set_input_select(CH::channel());
+        reg.set_end_of_conversion(false);
+        self.write_register_raw(Registers::ADCONFIG, reg.0)?;
 
         let lowb = self.read_register_raw(Registers::ADRESULT_1)?;
         let highb = self.read_register_raw(Registers::ADRESULT_2)?;
