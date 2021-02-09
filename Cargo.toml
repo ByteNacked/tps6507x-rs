@@ -1,7 +1,14 @@
 [package]
 name = "tps6507x"
-version = "0.1.0-alpha.0"
-authors = ["Roman M. <m3angreen@gmail.com>"]
+version = "0.1.0-alpha.1"
+authors = ["Roman Maslennikov. <m3angreen@gmail.com>"]
+repository = "https://github.com/ButtNaked/tps6507x-rs"
+license = "MIT OR Apache-2.0"
+description = "This is a platform agnostic Rust driver for the TPS6507x series Texas Instruments power management ICs"
+keywords = ["tps", "power-management", "driver", "i2c", "embedded-hal-driver"]
+categories = ["embedded", "hardware-support", "no-std"]
+homepage = "https://github.com/ButtNaked/tps6507x-rs"
+documentation = "https://docs.rs/tps6507x"
 edition = "2018"
 
 [dependencies]
