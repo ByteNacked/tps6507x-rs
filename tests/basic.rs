@@ -1,7 +1,7 @@
 use embedded_hal_mock::i2c::{Mock as I2cMock, Transaction as I2cTransaction};
 
 use tps6507x::ChargerConfig;
-use tps6507x::DCDCOutputVoltage;
+use tps6507x::DCDCVoltage;
 use tps6507x::Tps6507x;
 
 #[test]
@@ -20,10 +20,10 @@ fn test() {
     let i2c = I2cMock::new(&expectations);
 
     let mut tps = Tps6507x::new(i2c);
-    tps.set_dcdc1(DCDCOutputVoltage::V2_200).unwrap();
-    tps.set_dcdc2_high(DCDCOutputVoltage::V3_300).unwrap();
-    tps.set_dcdc3_high(DCDCOutputVoltage::V1_500).unwrap();
-    tps.set_ldo2(DCDCOutputVoltage::V3_300).unwrap();
+    tps.set_dcdc1(DCDCVoltage::V2_200).unwrap();
+    tps.set_dcdc2_high(DCDCVoltage::V3_300).unwrap();
+    tps.set_dcdc3_high(DCDCVoltage::V1_500).unwrap();
+    tps.set_ldo2(DCDCVoltage::V3_300).unwrap();
     tps.set_charger_config(ChargerConfig {
         charger_enable: false,
         ..Default::default()

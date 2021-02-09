@@ -1,5 +1,5 @@
 #[repr(u8)]
-pub enum LDO1OutputVoltage {
+pub enum LDO1Voltage {
     V1_0 = 0b0000,
     V1_1 = 0b0001,
     V1_2 = 0b0010,
@@ -20,7 +20,7 @@ pub enum LDO1OutputVoltage {
 
 #[derive(Debug)]
 #[repr(u8)]
-pub enum DCDCOutputVoltage {
+pub enum DCDCVoltage {
     V0_725 = 0b000_000,
     V0_750 = 0b000_001,
     V0_775 = 0b000_010,
@@ -87,9 +87,9 @@ pub enum DCDCOutputVoltage {
     V3_300 = 0b111_111,
 }
 
-impl From<u8> for DCDCOutputVoltage {
+impl From<u8> for DCDCVoltage {
     fn from(value: u8) -> Self {
-        use DCDCOutputVoltage::*;
+        use DCDCVoltage::*;
         match value {
             0b000_000 => V0_725,
             0b000_001 => V0_750,
@@ -160,8 +160,8 @@ impl From<u8> for DCDCOutputVoltage {
     }
 }
 
-impl From<DCDCOutputVoltage> for u8 {
-    fn from(v: DCDCOutputVoltage) -> Self {
+impl From<DCDCVoltage> for u8 {
+    fn from(v: DCDCVoltage) -> Self {
         v as u8
     }
 }

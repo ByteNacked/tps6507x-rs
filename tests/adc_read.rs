@@ -1,7 +1,7 @@
 use embedded_hal::adc::OneShot;
 use embedded_hal_mock::i2c::{Mock as I2cMock, Transaction as I2cTransaction};
 
-use tps6507x::adc::channel;
+use tps6507x::channel;
 use tps6507x::Tps6507x;
 
 #[test]

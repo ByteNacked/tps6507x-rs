@@ -1,19 +1,18 @@
 use embedded_hal::adc;
 use embedded_hal::blocking::i2c;
 
-use crate::regs::adconfig;
-use crate::Registers;
-use crate::Tps6507x;
+use crate::device::Tps6507x;
+use crate::regs::{self, Registers};
 
 impl<I2C, E, CH> adc::OneShot<Tps6507x<I2C>, u16, CH> for Tps6507x<I2C>
 where
     I2C: i2c::WriteRead<Error = E> + i2c::Write<Error = E>,
-    CH: adc::Channel<Tps6507x<I2C>, ID = adconfig::AdcInputSelect>,
+    CH: adc::Channel<Tps6507x<I2C>, ID = regs::adc::AdcInputSelect>,
 {
     type Error = E;
 
     fn read(&mut self, _: &mut CH) -> nb::Result<u16, Self::Error> {
-        let mut reg = adconfig::ADCONFIG(self.read_register_raw(Registers::ADCONFIG)?);
+        let mut reg = regs::adc::ADCONFIG(self.read_register_raw(Registers::ADCONFIG)?);
 
         if !reg.end_of_conversion() {
             return Err(nb::Error::WouldBlock);
@@ -54,7 +53,7 @@ pub mod channel {
     macro_rules! impl_channel {
         ( $CH:ident ) => {
             impl<I2C> adc::Channel<crate::Tps6507x<I2C>> for $CH {
-                type ID = adconfig::AdcInputSelect;
+                type ID = regs::adc::AdcInputSelect;
 
                 fn channel() -> Self::ID {
                     Self::ID::$CH
