@@ -115,12 +115,14 @@ where
         self.write_register_raw(Registers::ADCONFIG, reg.0)?;
         Ok(())
     }
-
+    
+    /// Raw register write access
     pub fn write_register_raw(&mut self, register: Registers, value: u8) -> Result<(), E> {
         self.i2c
             .write(SLAVE_ADDR, &[register as u8, value])
     }
 
+    /// Raw register read access
     pub fn read_register_raw(&mut self, register: Registers) -> Result<u8, E> {
         let mut buf = [0u8];
         self.i2c
