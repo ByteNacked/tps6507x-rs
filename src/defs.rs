@@ -1,3 +1,6 @@
+#![allow(clippy::unusual_byte_groupings)]
+
+#[derive(Debug, Clone, Copy)]
 #[repr(u8)]
 pub enum LDO1Voltage {
     V1_0 = 0b0000,
@@ -18,7 +21,38 @@ pub enum LDO1Voltage {
     V3_3 = 0b1111,
 }
 
-#[derive(Debug)]
+impl From<LDO1Voltage> for u8 {
+    fn from(v: LDO1Voltage) -> Self {
+        v as u8
+    }
+}
+
+impl From<u8> for LDO1Voltage {
+    fn from(value: u8) -> Self {
+        use LDO1Voltage::*;
+        match value {
+            0b0000 => V1_0,
+            0b0001 => V1_1,
+            0b0010 => V1_2,
+            0b0011 => V1_25,
+            0b0100 => V1_3,
+            0b0101 => V1_35,
+            0b0110 => V1_4,
+            0b0111 => V1_5,
+            0b1000 => V1_6,
+            0b1001 => V1_8,
+            0b1010 => V2_5,
+            0b1011 => V2_75,
+            0b1100 => V2_8,
+            0b1101 => V3_0,
+            0b1110 => V3_1,
+            0b1111 => V3_3,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
 #[repr(u8)]
 pub enum DCDCVoltage {
     V0_725 = 0b000_000,

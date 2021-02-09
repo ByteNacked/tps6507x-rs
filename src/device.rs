@@ -93,6 +93,15 @@ where
         Ok(())
     }
 
+    /// Sets output voltage of LDO1
+    pub fn set_ldo1(&mut self, voltage: LDO1Voltage) -> Tps6507xResult<(), E> {
+        let mut reg = ldo::LDO_CTRL1(self.read_register_raw(Registers::LDO_CTRL1)?);
+        reg.set_ldo1(voltage);
+
+        self.write_register_raw(Registers::LDO_CTRL1, reg.0)?;
+        Ok(())
+    }
+
     /// The DEFLDO2 register is used to set the output voltage of LDO2
     pub fn set_ldo2(&mut self, voltage: DCDCVoltage) -> Tps6507xResult<(), E> {
         self.write_register_raw(Registers::DEFLDO2, voltage as u8)?;
@@ -110,7 +119,6 @@ where
     pub fn write_register_raw(&mut self, register: Registers, value: u8) -> Result<(), E> {
         self.i2c
             .write(SLAVE_ADDR, &[register as u8, value])
-            .map_err(|e| e.into())
     }
 
     pub fn read_register_raw(&mut self, register: Registers) -> Result<u8, E> {
