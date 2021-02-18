@@ -19,7 +19,7 @@ currents.
 
 
 Datasheets:
-- [TPS6507x](http://www.ti.com/lit/ds/symlink/ads1015.pdf)
+- [TPS6507x](https://www.ti.com/lit/ds/symlink/tps65070.pdf)
 
 ## Usage
 This crate is **WIP**
