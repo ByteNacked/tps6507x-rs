@@ -136,3 +136,14 @@ impl<E> From<E> for Tps6507xError<E> {
         Self::Interface(e)
     }
 }
+
+// Hack impl to prevent nested `nb::Error<nb::Error<E>>` error types,
+// due to unfourtunate adc::OneShot trait interface
+impl<E> From<nb::Error<nb::Error<E>>> for Tps6507xError<nb::Error<E>> {
+    fn from(e: nb::Error<nb::Error<E>>) -> Self {
+        match e {
+            nb::Error::WouldBlock => Self::Interface(nb::Error::WouldBlock),
+            nb::Error::Other(nb) => Self::Interface(nb),
+        }
+    }
+}
