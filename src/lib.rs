@@ -17,7 +17,7 @@ mod oneshot;
 mod regs;
 
 pub use defs::*;
-pub use device::{Tps6507x, Tps6507xError, SLAVE_ADDR};
+pub use device::{Tps6507x, Tps6507xError, Tps6507xResult, SLAVE_ADDR};
 pub use regs::chgconfig::{ChargerConfig, SafetyTimerTimeOut, SensorType};
 pub use regs::ppath::{AcInputCurrent, PowerPath, UsbInputCurrent};
 
