@@ -22,7 +22,7 @@ fn test() {
 
     let mut tps = Tps6507x::new(i2c);
     tps.set_adc_vref(true).unwrap();
-    let sample = tps.read(&mut channel::VoltageBatPins).unwrap();
+    let sample = tps.read(&mut channel::VoltageBatPins_VrefOn).unwrap();
 
     assert_eq!(sample, (0x02 << 8) | 0xA5);
 
